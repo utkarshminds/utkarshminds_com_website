@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Jobs & Internship Emails</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #007BFF; }
+    table {
+      width: 90%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    a { text-decoration: none; color: #007BFF; font-weight: bold; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h1>Jobs & Internship Emails</h1>
+
+<table id="jobTable">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Notes</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+window.onload = function() {
+  // Your public CSV link from Google Sheet
+  const sheetURL = "https://docs.google.com/spreadsheets/d/1VapOTPKl_OExuwevu9oEjmXpWS7kHbRt/gviz/tq?tqx=out:csv&gid=856376386";
+
+  fetch(sheetURL)
+    .then(res => res.text())
+    .then(data => {
+      const rows = data.split("\n").slice(1); // skip header
+      const table = document.querySelector("#jobTable tbody");
+
+      rows.forEach(row => {
+        if(row.trim() !== ""){
+          // remove angle brackets & trim
+          const cols = row.split(",").map(c => c.replace(/</g,"").replace(/>/g,"").trim());
+
+          table.innerHTML += `
+            <tr>
+              <td>${cols[0] || ""}</td>
+              <td>${cols[1] || ""}</td>
+              <td>${cols[2] || ""}</td>
+              <td><a href="mailto:${cols[0]}">Send Mail</a></td>
+            </tr>
+          `;
+        }
+      });
+    })
+    .catch(err => {
+      console.error("Error loading Google Sheet:", err);
+      const table = document.querySelector("#jobTable tbody");
+      table.innerHTML = `<tr><td colspan="4">Failed to load data. Make sure the sheet is public.</td></tr>`;
+    });
+};
+</script>
+
+</body>
+</html>
