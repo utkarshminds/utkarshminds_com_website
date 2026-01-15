@@ -2723,3 +2723,9 @@ span.stButton_gradient,
   border-radius: 100%;
   margin: 10px 0;
 }
+.creator-footer {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin: 20px 0;
+}
