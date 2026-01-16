@@ -2723,6 +2723,31 @@ span.stButton_gradient,
   border-radius: 100%;
   margin: 10px 0;
 }
+/* ats button */
+.ats-btn {
+  background: linear-gradient(135deg, #1E90FF, #0057D9);
+  color: white;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+  transition: 0.3s ease;
+}
+
+.ats-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #1C86EE, #003DA5);
+}
+.ats-section {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+
 .creator-footer {
   text-align: center;
   font-size: 14px;
